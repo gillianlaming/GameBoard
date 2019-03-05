@@ -11,3 +11,7 @@ private:
 //and a reference to a const game class object as parameters, and returns the ostream reference 
 //that was passed in (this allows the operator to be called repeatedly on the same ostream 
 //object as in cout << tictactoe_game << endl;)
+
+istream operator<<(ostream & output, const TicTacToeGame newGame) {
+	return output;
+}
