@@ -25,7 +25,7 @@ string noName(piece_color color)
 	return enumColors[val]; //return string at array element of the piece_color
 }
 
-piece_color whatColor(string color) 
+piece_color whatColor(string color)
 {
 	//this is so inefficient. is there a better way?
 	if (color == "red") {
@@ -44,5 +44,3 @@ piece_color whatColor(string color)
 		return invalidColor;
 	}
 }
-
-
