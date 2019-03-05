@@ -33,6 +33,9 @@
     <ClInclude Include="GamePieces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TicTacToe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

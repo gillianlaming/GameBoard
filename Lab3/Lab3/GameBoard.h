@@ -4,6 +4,7 @@
 #include <vector>
 using namespace std;
 
+//edited 
 //function definitions
 int readBoard(ifstream & file, unsigned int & width, unsigned int & height);
 int printBoard(const vector<game_piece> & board, unsigned int width, unsigned int height);

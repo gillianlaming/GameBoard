@@ -1,8 +1,9 @@
-// Lab3.cpp : Defines the entry point for the console application.
-//
 
 #include "stdafx.h"
-
+#include "GameBoard.h"
+#include "GamePieces.h"
+#include "Header.h"
+#include "TicTacToe.h"
 
 int main()
 {
