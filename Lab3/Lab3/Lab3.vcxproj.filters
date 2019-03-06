@@ -50,5 +50,8 @@
     <ClCompile Include="GamePieces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TicTacToe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

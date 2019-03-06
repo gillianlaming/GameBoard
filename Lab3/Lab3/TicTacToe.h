@@ -5,6 +5,7 @@ private:
 	//new game board
 	//game piece either an X or O
 	//initialize board so that outer squares always stay empty
+	friend ostream  operator<<(ostream & output, const TicTacToeGame newGame);
 };
 
 //declare and define an insertion operator (operator<<) that takes a reference to an ostream 
@@ -12,6 +13,4 @@ private:
 //that was passed in (this allows the operator to be called repeatedly on the same ostream 
 //object as in cout << tictactoe_game << endl;)
 
-istream operator<<(ostream & output, const TicTacToeGame newGame) {
-	return output;
-}
+ostream  operator<<(ostream & output, const TicTacToeGame newGame);
