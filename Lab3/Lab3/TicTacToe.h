@@ -1,14 +1,14 @@
 #pragma once
 #include "GameBoard.h"
-#include "GamePieces.h"
 #include <iomanip>
 #include <ctype.h>
 #include <vector>
-#include "Header.h"
+
+
 
 
 class TicTacToeGame {
-	friend ostream & operator<<(ostream &, const TicTacToeGame &);
+	friend ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 private:
 	
 	vector<game_piece> game_board; 
@@ -17,6 +17,7 @@ private:
 	//initialize board so that outer squares always stay empty
 	
 public:
+	vector<game_piece> game_board;
 	bool done();
 	bool draw();
 	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin

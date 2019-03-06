@@ -3,21 +3,23 @@
 #include "Header.h"
 #include "GameBoard.h"
 #include "GamePieces.h"
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-using namespace std;
 #include "TicTacToe.h"
+
+using namespace std;
+
 
 int main()
 {
-	for (int i = 0; i < game_board.size(); i++) {
+	for ( int i = 0; i < game_board.size(); i++) {
 		int n = game_board.size();
 		game_piece empty;  
 		empty.display = " ";
-		if (!((n < i < n*(n-1)) && (0 < (i % n) <= (n - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
+
+		if (!((n < i) && (i < n*(n-1)) && (0 < (i % n)) &&((i%n) <= (n - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
 			empty.color = border;
+		}
+		else {
+			empty.color = black;
 		}
 		game_board.push_back(empty);
 	}

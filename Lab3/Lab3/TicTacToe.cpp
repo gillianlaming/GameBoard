@@ -1,16 +1,14 @@
-#include "TicTacToe.h"
+
 #include "stdafx.h"
+#include "TicTacToe.h"
 #include "Header.h"
 #include "GameBoard.h"
 #include "GamePieces.h"
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <sstream>
+
+
 using namespace std;
 
-vector<game_piece> game_board;
+//vector<game_piece> game_board(25);
 
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
@@ -36,10 +34,19 @@ bool done() { //fix this
 }
 
 bool draw() {
+	int numMovesRemaining = 0; 
 	if (done()) {
 		return false;
 	}
-	for (int i = 0; i < game_board.size(); i++) {
-		if (game_board[i].color != border && game_board[i].display == " ")
+	for (unsigned int i = 0; i < game_board.size(); i++) {
+		if (game_board[i].color != border && game_board[i].display == " ") {
+			numMovesRemaining++;
+		}
+	}
+	if (numMovesRemaining != 0) {
+		return false;
+	}
+	else {
+		return false;
 	}
 }
