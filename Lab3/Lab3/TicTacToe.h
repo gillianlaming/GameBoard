@@ -24,6 +24,6 @@ public:
 	int play();
 };
 
-
+vector<game_piece> game_board(25);
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 

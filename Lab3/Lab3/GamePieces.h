@@ -5,7 +5,7 @@ using namespace std;
 
 //edited 
 //enum definition
-enum piece_color { red, black, white, invalidColor, noColor };
+enum piece_color { red, black, white, invalidColor, noColor, border };
 
 //function definitons
 piece_color whatColor(string color);
