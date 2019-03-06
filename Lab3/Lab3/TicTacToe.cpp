@@ -64,20 +64,18 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		char comma;
 		string message;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
-			if (comma != ',') { //check to make sure the char is a comma
-				//invalid entry
-			}
-			else {
-				runLoop = false;
-				return success;
+			if (comma == ',') { //check to make sure the char is a comma
+				if (xCoord <= game_board.size() && yCoord <= game_board.size()) { //need to make sure coords are on board
+					runLoop = false;
+					return success;
+				}
 			}
 		}
 		else if (iss >> message) {
-			if (message.compare("quit") == 0) { //the user's input is quit
+			if (message.compare("quit") == 0) { //if the two strings are equal
 				runLoop = false;
 				return userQuit;
 			}
 		}
-		return success;
 	}
 }
