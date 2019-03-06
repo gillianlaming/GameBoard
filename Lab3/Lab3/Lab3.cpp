@@ -7,6 +7,7 @@
 
 using namespace std;
 
+vector<game_piece> game_board(25); //temporary
 
 int main()
 {

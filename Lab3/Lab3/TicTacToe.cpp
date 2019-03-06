@@ -4,11 +4,14 @@
 #include "Header.h"
 #include "GameBoard.h"
 #include "GamePieces.h"
+#include <iostream>
+#include <sstream>
+#include <fstream>
 
 
 using namespace std;
 
-//vector<game_piece> game_board(25);
+
 
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
@@ -23,7 +26,7 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	return output;
 }
 
-bool done() { //fix this
+bool TicTacToeGame:: done() { //fix this
 	int options[8][3] = { {6,7,8},{11,12,13},{16,17,18},{6,11,16},{17,12,7},{18,13,8},{16,12,8},{18,12,6}};
 	for (int i = 0; i < 8; i++) {
 		if (game_board[options[i][0]].display == game_board[options[i][1]].display && game_board[options[i][1]].display == game_board[options[i][2]].display) {
@@ -33,7 +36,7 @@ bool done() { //fix this
 	return false;
 }
 
-bool draw() {
+bool TicTacToeGame::draw() {
 	int numMovesRemaining = 0; 
 	if (done()) {
 		return false;
@@ -47,6 +50,34 @@ bool draw() {
 		return false;
 	}
 	else {
-		return false;
+		return true;
+	}
+}
+
+int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
+	bool runLoop = true;
+	while (runLoop) {
+		cout << "Please enter valid coordinates(x,y), or type quit." << endl;
+		string line;
+		cin >> line;
+		istringstream iss(line);
+		char comma;
+		string message;
+		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
+			if (comma != ',') { //check to make sure the char is a comma
+				//invalid entry
+			}
+			else {
+				runLoop = false;
+				return success;
+			}
+		}
+		else if (iss >> message) {
+			if (message.compare("quit") == 0) { //the user's input is quit
+				runLoop = false;
+				return userQuit;
+			}
+		}
+		return success;
 	}
 }
