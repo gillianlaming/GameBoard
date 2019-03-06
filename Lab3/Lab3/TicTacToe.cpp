@@ -56,7 +56,11 @@ bool TicTacToeGame::draw() {
 
 int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 	bool runLoop = true;
+	int count = 0; 
 	while (runLoop) {
+		if (count != 0) { //if second iteration through loop
+			cout << "Invalid input. ";
+		}
 		cout << "Please enter valid coordinates(x,y), or type quit." << endl;
 		string line;
 		cin >> line;
@@ -77,5 +81,6 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 				return userQuit;
 			}
 		}
+		count++;
 	}
 }
