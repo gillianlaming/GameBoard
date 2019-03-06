@@ -1,16 +1,29 @@
 #pragma once
+#include "GameBoard.h"
+#include "GamePieces.h"
+#include <iomanip>
+#include <ctype.h>
+#include <vector>
+#include "Header.h"
+
 
 class TicTacToeGame {
+	friend ostream & operator<<(ostream &, const TicTacToeGame &);
 private:
-	//new game board
-	//game piece either an X or O
+	
+	vector<game_piece> game_board; 
+	//game_piece myPiece;//game piece either an X or O
+	
 	//initialize board so that outer squares always stay empty
-	friend ostream  operator<<(ostream & output, const TicTacToeGame newGame);
+	
+public:
+	bool done();
+	bool draw();
+	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin
+	int turn();
+	int play();
 };
 
-//declare and define an insertion operator (operator<<) that takes a reference to an ostream 
-//and a reference to a const game class object as parameters, and returns the ostream reference 
-//that was passed in (this allows the operator to be called repeatedly on the same ostream 
-//object as in cout << tictactoe_game << endl;)
 
-ostream  operator<<(ostream & output, const TicTacToeGame newGame);
+ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
+
