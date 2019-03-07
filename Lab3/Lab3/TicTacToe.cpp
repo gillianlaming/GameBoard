@@ -17,7 +17,7 @@ TicTacToeGame::TicTacToeGame() {
 	for (int i = 0; i < rows*cols; i++) {
 		int n = game_board.size();
 		game_piece empty;
-		empty.display = " ";
+		empty.display = " - ";
 
 		if (!((rows < i) && (i < rows*(cols - 1)) && (0 < (i % rows)) && ((i%rows) <= (cols - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
 			empty.color = border;
@@ -32,8 +32,7 @@ TicTacToeGame::TicTacToeGame() {
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
 	int size = newGame.game_board.size();
-	cout << "hi hello just trying to print the board" << endl;
-	for (int r = 0; r < newGame.rows; r++) { //not sure if 
+	for (int r = 0; r < newGame.rows; r++) {//not sure if 
 		for (int c = 0; c < newGame.cols; c++) {
 			output << newGame.game_board[(newGame.cols*c)+r].display;
 		}
@@ -111,11 +110,11 @@ int TicTacToeGame::turn() {
 	player = !player; //alternate turns 
 	cout << "player " << move << "'s turn" << endl;
 	if (player) {
-		move = 'X';
+		move = " X ";
 		cout << "Player X: "; 
 	}
 	else {
-		move = 'O';
+		move = " O ";
 		cout << "Player O: "; 
 	}
 	
@@ -128,9 +127,12 @@ int TicTacToeGame::turn() {
 			//A move is valid if and only if it moves a piece to an empty square. 
 			//Specifically, a valid move is within the 9 inner squares of the game board.
 			int n = game_board.size()/rows;
-			int boardIndex = (game_board.size()*y) + x;
-			if (((n < boardIndex) && (boardIndex < n*(n - 1)) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
+			int boardIndex = (n*y) + x;
+			cout << "boardIndex " << boardIndex << endl;
+			if (((n < boardIndex) && (boardIndex < game_board.size()) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
+				cout << "1 " << endl;
 				if(game_board[boardIndex].display == " "){ //now it is a valid move
+					cout << "2 " << endl;
 					game_board[boardIndex].display = move; //move the piece to that square
 					cout << *this << endl; //print out updated board
 

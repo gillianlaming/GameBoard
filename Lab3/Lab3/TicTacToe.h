@@ -22,7 +22,7 @@ public:
 	int turns = 0;
 	int play();
 	bool player = false; //true -> X, false -> O
-	char move = 'X';
+	string move = " X ";
 	string playerX;
 	string playerO;
 };
