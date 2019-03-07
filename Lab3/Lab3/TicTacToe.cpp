@@ -15,10 +15,11 @@ using namespace std;
 
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
-	for (int r = 0; r < 5; r++) { //not sure if 
-		for (int c = 0; c < 5; c++) {
-			output << newGame.game_board[(5*c)+r].display;
-			
+	int size = newGame.game_board.size();
+
+	for (int r = 0; r < size; r++) { //not sure if 
+		for (int c = 0; c < size; c++) {
+			output << newGame.game_board[(size*c)+r].display;
 		}
 		output << endl;
 	}
@@ -96,9 +97,18 @@ int TicTacToeGame::turn() {
 	bool runLoop = true;
 	while (runLoop) {
 		if (prompt(x, y) == success) {
+			runLoop = false;
+			//need to determine if move is valid
+			//A move is valid if and only if it moves a piece to an empty square. 
+			//Specifically, a valid move is within the 9 inner squares of the game board.
+			int n = game_board.size();
+			int boardIndex = (game_board.size()*y) + x;
+			if (((n < boardIndex) && (boardIndex < n*(n - 1)) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
 
+			}
 		}
 		else if (prompt(x, y) == userQuit) {
+			runLoop = false;
 			return userQuit;
 		}
 	}

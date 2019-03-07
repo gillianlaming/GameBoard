@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <vector>
 
+
 class TicTacToeGame {
 	friend ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 private:
@@ -18,7 +19,7 @@ public:
 	int play();
 	bool player = true; //true -> X, false -> O
 };
-
+//enum players {X="x", O="o"};
 //vector<game_piece> game_board(25);
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 
