@@ -21,6 +21,7 @@ public:
 	int turn();
 	int turns = 0;
 	int play();
+	int getValidMoves(int x, int y);
 	bool player = false; //true -> X, false -> O
 	string move = "X";
 	char playerX[100] = "Player X's moves: ";

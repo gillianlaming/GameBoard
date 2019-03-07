@@ -139,15 +139,13 @@ int TicTacToeGame::turn() {
 					cout << endl;
 					//find
 					if (player) {
-						//playerX += '; ' + x + ', ' + y; //come back to this
-						//cout << "Player X: ";
-						cout << playerX << endl;
+						cout << playerX;
+						getValidMoves(x, y);
 						cout << endl;
 					}
 					else {
-						//cout << "Player O: ";
-						//playerO += '; ' + x + ', ' + y;
-						cout << playerO << endl;
+						cout << playerO;
+						getValidMoves(x, y);
 						cout << endl;
 					}
 					turns++;
@@ -162,6 +160,19 @@ int TicTacToeGame::turn() {
 			return userQuit;
 		}
 	}
+	return success;
+}
+
+int TicTacToeGame::getValidMoves(int x, int y) {
+	//cout << x << "," << y;
+	for (unsigned int i = 0; i < game_board.size(); i++) {
+		if (game_board[i].display == move) {
+			int yCoor = (i % 5); //hardcoded
+			int xCoor = (i - yCoor) / 5;
+			cout << xCoor << "," << yCoor << ';';
+		}
+	}
+	cout << endl;
 	return success;
 }
 
