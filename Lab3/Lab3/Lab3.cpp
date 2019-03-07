@@ -21,7 +21,8 @@ int main(int argc, char * argv[])
 	//if (argv[inputFile] != "TicTacToe") {
 		//return fileFailure();
 	//}
-	TicTacToeGame newGame(5);
+
+	TicTacToeGame newGame;
 
 	return newGame.play();
 }

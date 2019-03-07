@@ -9,10 +9,12 @@
 class TicTacToeGame {
 	friend ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 private:
+	int rows;
+	int cols;
 	vector<game_piece> game_board; 
 	
 public:
-	TicTacToeGame( int size);
+	TicTacToeGame();
 	bool done();
 	bool draw();
 	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin
@@ -20,7 +22,7 @@ public:
 	int turns = 0;
 	int play();
 	bool player = false; //true -> X, false -> O
-	char move;
+	char move = 'X';
 	string playerX;
 	string playerO;
 };

@@ -11,14 +11,15 @@
 
 using namespace std;
 
-TicTacToeGame::TicTacToeGame(int size) {
-	game_board
-	for (int i = 0; i < size; i++) {
+TicTacToeGame::TicTacToeGame() {
+	rows = 5;
+	cols = 5;
+	for (int i = 0; i < rows*cols; i++) {
 		int n = game_board.size();
 		game_piece empty;
 		empty.display = " ";
 
-		if (!((n < i) && (i < n*(n - 1)) && (0 < (i % n)) && ((i%n) <= (n - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
+		if (!((rows < i) && (i < rows*(cols - 1)) && (0 < (i % rows)) && ((i%rows) <= (cols - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
 			empty.color = border;
 		}
 		else {
@@ -31,10 +32,10 @@ TicTacToeGame::TicTacToeGame(int size) {
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
 	int size = newGame.game_board.size();
-
-	for (int r = 0; r < size; r++) { //not sure if 
-		for (int c = 0; c < size; c++) {
-			output << newGame.game_board[(size*c)+r].display;
+	cout << "hi hello just trying to print the board" << endl;
+	for (int r = 0; r < newGame.rows; r++) { //not sure if 
+		for (int c = 0; c < newGame.cols; c++) {
+			output << newGame.game_board[(newGame.cols*c)+r].display;
 		}
 		output << endl;
 	}
@@ -46,9 +47,11 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 bool TicTacToeGame:: done() { //fix this
 	int options[8][3] = { {6,7,8},{11,12,13},{16,17,18},{6,11,16},{17,12,7},{18,13,8},{16,12,8},{18,12,6}};
 	for (int i = 0; i < 8; i++) {
-		if (game_board[options[i][0]].display == game_board[options[i][1]].display && game_board[options[i][1]].display == game_board[options[i][2]].display) {
-			return true;
-		}
+		if ((game_board[options[i][0]].display == "X") || (game_board[options[i][0]].display == "O")) {
+			if (game_board[options[i][0]].display == game_board[options[i][1]].display && game_board[options[i][1]].display == game_board[options[i][2]].display) {
+				return true;
+			}
+		}	
 	}
 	return false;
 }
@@ -86,24 +89,27 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		string message;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
 			if (comma == ',') { //check to make sure the char is a comma
-				if (xCoord <= game_board.size() && yCoord <= game_board.size()) { //need to make sure coords are on board
+				//hardcode
+				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
 					runLoop = false;
+					cout << "entered correctly" << endl;
 					return success;
 				}
 			}
 		}
 		else if (iss >> message) {
-			if (message.compare("quit") == 0) { //if the two strings are equal
+			if (message == "quit") { //if the two strings are equal
 				runLoop = false;
 				return userQuit;
 			}
 		}
 		count++;
 	}
+	return success;
 }
 int TicTacToeGame::turn() {
 	player = !player; //alternate turns 
-	//char move;
+	cout << "player " << move << "'s turn" << endl;
 	if (player) {
 		move = 'X';
 		cout << "Player X: "; 
@@ -118,11 +124,10 @@ int TicTacToeGame::turn() {
 	bool runLoop = true;
 	while (runLoop) {
 		if (prompt(x, y) == success) {
-			runLoop = false;
 			//need to determine if move is valid
 			//A move is valid if and only if it moves a piece to an empty square. 
 			//Specifically, a valid move is within the 9 inner squares of the game board.
-			int n = game_board.size();
+			int n = game_board.size()/rows;
 			int boardIndex = (game_board.size()*y) + x;
 			if (((n < boardIndex) && (boardIndex < n*(n - 1)) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
 				if(game_board[boardIndex].display == " "){ //now it is a valid move
@@ -139,6 +144,7 @@ int TicTacToeGame::turn() {
 						playerO += '; ' + x + ', ' + y;
 					}
 					turns++;
+					runLoop = false;
 					return success;
 				}
 			}
@@ -148,26 +154,31 @@ int TicTacToeGame::turn() {
 			return userQuit;
 		}
 	}
+	return success;
 }
 
 int TicTacToeGame::play() {
 	cout << *this << endl; //print out updated board
-
+	
 	//turn, then done, then draw
-	while (!done() && !draw()) { 
+	bool isDone = done();
+	bool isDraw = draw();
+	cout << "is done? " << isDone << " or isDraw? " << isDraw << endl;
+	while ((!isDone) && (!isDraw)) { 
+		cout << "while loop!!" << endl;
 		int result = turn();
 		if (result == userQuit) {
 			cout << "User quit. " << turns << " turns were played." << endl; //if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
 			return userQuit;
 		}
 	}
-	if (done()) { //if done returns true, print out the winner, return success
+	if (isDone) { //if done returns true, print out the winner, return success
 		cout << "Player " << move << " won." << endl;
 		return success;
 	}
-	else if (draw()) { 
+	else if (isDraw) { 
 		cout << "Draw: No more winning moves remain. " << turns << " turns were played." << endl; //if draw returns true, print how many turns were played, say no winning moves remain			
 		return drawResult; //return unique non-zero error code
-
 	}
+	return success;
 }
