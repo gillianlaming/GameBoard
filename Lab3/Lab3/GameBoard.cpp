@@ -171,7 +171,7 @@ int printInfo(const vector<game_piece> & board, unsigned int width, unsigned int
 
 
 																						   //then, iterate through the vector and print off info for all neighboring elements
-				for (int i = 0; i < neighbors.size(); ++i) {
+				for (unsigned int i = 0; i < neighbors.size(); ++i) {
 
 					//check to see if piece is filled
 					if (!(neighbors[i].color == noColor)) {
