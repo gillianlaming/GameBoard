@@ -133,5 +133,21 @@ int TicTacToeGame::turn() {
 }
 
 int TicTacToeGame::play() {
+	//print out gameboard
+	//turn, then done, then draw
 
+	while (!done() && !draw()) { 
+		turn();
+	}
+	if (done()) { //if done returns true, print out the winner, return success
+
+	}
+	else if (draw()) { //if draw returns true, print how many turns were played, say no winning moves remain
+						//return unique non-zero error code
+
+	}
+	
+	
+
+	//if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
 }
