@@ -48,6 +48,7 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) { //look 
 
 
 bool TicTacToeGame:: done() { //hardcoded
+	int nonBorder = TicTacToeGame::rows - 2;
 	int options[8][3] = { {6,7,8},{11,12,13},{16,17,18},{6,11,16},{17,12,7},{18,13,8},{16,12,8},{18,12,6}};
 	for (int i = 0; i < 8; i++) {
 		if ((game_board[options[i][0]].display == "X") || (game_board[options[i][0]].display == "O")) {
