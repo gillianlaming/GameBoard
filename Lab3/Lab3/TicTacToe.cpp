@@ -97,25 +97,15 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		istringstream iss(line);
 		char comma;
 		string message;
-		//cout << "line read in: " << line << endl;
-		//cout << "compare result: " << a << endl;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
-			cout << "hit" << endl;
 			if (comma == ',') { //check to make sure the char is a comma
-				//hardcode
 				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
 					runLoop = false;
-					//cout << "entered correctly" << endl;
 					return success;
 				}
 			}
 		}
-		(iss >> message);
-		cout << "message: " << message;
-		int a = message.compare("quit");
-		cout << a << endl;
-		if (a == 0) { //if the two strings are equal
-			cout << "hitme" << endl;
+		if (line.compare("quit") == 0) { //if the two strings are equal
 			runLoop = false;
 			return userQuit;
 		}
