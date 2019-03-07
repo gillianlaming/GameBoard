@@ -34,11 +34,20 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	int size = newGame.game_board.size();
 	for (int r = newGame.rows-1; r >= 0 ; r--) {//not sure if 
 	//for (int r =0; r < newGame.rows; r++){
+		output << r;
+		
 		for (int c = 0; c < newGame.cols; c++) {
-			output << newGame.game_board[(newGame.cols*c)+r].display;
+			if (r == 0 && c >0) {
+				output << c;
+			}
+			else {
+				output << newGame.game_board[(newGame.cols*c) + r].display;
+			}
 		}
+		
 		output << endl;
 	}
+
 	
 	return output;
 }
@@ -88,7 +97,6 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		char comma;
 		string message;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
-			cout << "bleh" << endl;
 			if (comma == ',') { //check to make sure the char is a comma
 				//hardcode
 				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
@@ -112,11 +120,11 @@ int TicTacToeGame::turn() {
 	player = !player; //alternate turns 
 	cout << "player " << move << "'s turn" << endl;
 	if (player) {
-		move = " X ";
+		move = "X";
 		cout << "Player X: "; 
 	}
 	else {
-		move = " O ";
+		move = "O";
 		cout << "Player O: "; 
 	}
 	
@@ -125,16 +133,12 @@ int TicTacToeGame::turn() {
 	bool runLoop = true;
 	while (runLoop) {
 		if (prompt(x, y) == success) {
-			//need to determine if move is valid
-			//A move is valid if and only if it moves a piece to an empty square. 
-			//Specifically, a valid move is within the 9 inner squares of the game board.
 			int n = game_board.size()/rows;
-			int boardIndex = (n*y) + x;
+			int boardIndex = (n*x) + y;
 			cout << "boardIndex " << boardIndex << endl;
 			if (((n < boardIndex) && (boardIndex < game_board.size()) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
-				cout << "1 " << endl;
+				cout << "valid move" << endl;
 				if(game_board[boardIndex].display == " "){ //now it is a valid move
-					cout << "2 " << endl;
 					game_board[boardIndex].display = move; //move the piece to that square
 					cout << *this << endl; //print out updated board
 
@@ -142,10 +146,12 @@ int TicTacToeGame::turn() {
 					if (player) {
 						if (playerX.length() == 0) {
 							playerX += '; ' + x + ', ' + y; //come back to this
+							cout << playerX << endl;
 						}	
 					}
 					else {
 						playerO += '; ' + x + ', ' + y;
+						cout << playerO << endl;
 					}
 					turns++;
 					runLoop = false;
@@ -169,7 +175,6 @@ int TicTacToeGame::play() {
 	bool isDraw = draw();
 	cout << "is done? " << isDone << " or isDraw? " << isDraw << endl;
 	while ((!isDone) && (!isDraw)) { 
-		cout << "while loop!!" << endl;
 		int result = turn();
 		if (result == userQuit) {
 			cout << "User quit. " << turns << " turns were played." << endl; //if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
