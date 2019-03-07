@@ -7,6 +7,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <string>
 
 
 using namespace std;
@@ -96,62 +97,68 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		istringstream iss(line);
 		char comma;
 		string message;
+		//cout << "line read in: " << line << endl;
+		//cout << "compare result: " << a << endl;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
+			cout << "hit" << endl;
 			if (comma == ',') { //check to make sure the char is a comma
 				//hardcode
 				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
 					runLoop = false;
-					cout << "entered correctly" << endl;
+					//cout << "entered correctly" << endl;
 					return success;
 				}
 			}
 		}
-		//else if (iss >> message) {
-			else if (line == "quit") { //if the two strings are equal
-				runLoop = false;
-				return userQuit;
-			}
-		
+		(iss >> message);
+		cout << "message: " << message;
+		int a = message.compare("quit");
+		cout << a << endl;
+		if (a == 0) { //if the two strings are equal
+			cout << "hitme" << endl;
+			runLoop = false;
+			return userQuit;
+		}
 		count++;
 	}
 	return success;
 }
 int TicTacToeGame::turn() {
 	player = !player; //alternate turns 
-	cout << "player " << move << "'s turn" << endl;
 	if (player) {
 		move = "X";
-		cout << "Player X: "; 
 	}
 	else {
 		move = "O";
-		cout << "Player O: "; 
 	}
-	
+	cout << "player " << move << "'s turn" << endl;
 	unsigned int x;
 	unsigned int y;
 	bool runLoop = true;
 	while (runLoop) {
 		if (prompt(x, y) == success) {
-			int n = game_board.size()/rows;
+			int n = game_board.size() / rows;
 			int boardIndex = (n*x) + y;
-			cout << "boardIndex " << boardIndex << endl;
-			if (((n < boardIndex) && (boardIndex < game_board.size()) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
-				cout << "valid move" << endl;
+			//cout << "boardIndex " << boardIndex << endl;
+			if (game_board[boardIndex].color != border){
+				//cout << "valid move" << endl;
 				if(game_board[boardIndex].display == " "){ //now it is a valid move
 					game_board[boardIndex].display = move; //move the piece to that square
+					cout << endl;
 					cout << *this << endl; //print out updated board
-
+					cout << endl;
 					//find
 					if (player) {
-						if (playerX.length() == 0) {
-							playerX += '; ' + x + ', ' + y; //come back to this
-							cout << playerX << endl;
-						}	
+						//playerX += '; ' + x + ', ' + y; //come back to this
+						//cout << "Player X: ";
+						cout << playerX << endl;
+						cout << endl;
 					}
 					else {
-						playerO += '; ' + x + ', ' + y;
+						//cout << "Player O: ";
+						//playerO += '; ' + x + ', ' + y;
 						cout << playerO << endl;
+						cout << endl;
 					}
 					turns++;
 					runLoop = false;
@@ -159,7 +166,8 @@ int TicTacToeGame::turn() {
 				}
 			}
 		}
-		else if (prompt(x, y) == userQuit) {
+		//else if (prompt(x, y) == userQuit) {
+		else { 
 			runLoop = false;
 			return userQuit;
 		}
@@ -173,13 +181,14 @@ int TicTacToeGame::play() {
 	//turn, then done, then draw
 	bool isDone = done();
 	bool isDraw = draw();
-	cout << "is done? " << isDone << " or isDraw? " << isDraw << endl;
 	while ((!isDone) && (!isDraw)) { 
 		int result = turn();
 		if (result == userQuit) {
 			cout << "User quit. " << turns << " turns were played." << endl; //if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
 			return userQuit;
 		}
+		isDone = done();
+		isDraw = draw();
 	}
 	if (isDone) { //if done returns true, print out the winner, return success
 		cout << "Player " << move << " won." << endl;

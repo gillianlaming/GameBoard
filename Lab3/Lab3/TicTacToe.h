@@ -22,9 +22,9 @@ public:
 	int turns = 0;
 	int play();
 	bool player = false; //true -> X, false -> O
-	string move = " X ";
-	string playerX;
-	string playerO;
+	string move = "X";
+	char playerX[100] = "Player X's moves: ";
+	char playerO[100] = "Player O's moves: ";
 };
 //enum players {X="x", O="o"};
 //vector<game_piece> game_board(25);
