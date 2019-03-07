@@ -84,3 +84,26 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		count++;
 	}
 }
+int TicTacToeGame::turn() {
+	if (player) {
+		cout << "Player X" << endl; 
+	}
+	else {
+		cout << "Player O"<< endl; 
+	}
+	unsigned int x;
+	unsigned int y;
+	bool runLoop = true;
+	while (runLoop) {
+		if (prompt(x, y) == success) {
+
+		}
+		else if (prompt(x, y) == userQuit) {
+			return userQuit;
+		}
+	}
+	player = !player; //alternate turns
+}
+int TicTacToeGame::play() {
+
+}
