@@ -11,8 +11,9 @@
 
 using namespace std;
 
-TicTacToeGame::TicTacToeGame() {
-	for (int i = 0; i < game_board.size(); i++) {
+TicTacToeGame::TicTacToeGame(int size) {
+	game_board
+	for (int i = 0; i < size; i++) {
 		int n = game_board.size();
 		game_piece empty;
 		empty.display = " ";
@@ -130,7 +131,7 @@ int TicTacToeGame::turn() {
 
 					//find
 					if (player) {
-						if (playerX.length == 0) {
+						if (playerX.length() == 0) {
 							playerX += '; ' + x + ', ' + y; //come back to this
 						}	
 					}

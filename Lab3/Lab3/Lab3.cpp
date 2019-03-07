@@ -18,10 +18,10 @@ int main(int argc, char * argv[])
 	if (argc != commandLineArguments) {
 		return messageFunct(argv[programName]);
 	}
-	if (argc[inputFile] != "TicTacToe") {
-		return fileFailure();
-	}
-	TicTacToeGame newGame;
+	//if (argv[inputFile] != "TicTacToe") {
+		//return fileFailure();
+	//}
+	TicTacToeGame newGame(5);
 
 	return newGame.play();
 }

@@ -12,7 +12,7 @@ private:
 	vector<game_piece> game_board; 
 	
 public:
-	TicTacToeGame();
+	TicTacToeGame( int size);
 	bool done();
 	bool draw();
 	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin
