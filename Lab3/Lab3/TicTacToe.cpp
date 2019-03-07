@@ -86,12 +86,16 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 	}
 }
 int TicTacToeGame::turn() {
+	char move;
 	if (player) {
-		cout << "Player X" << endl; 
+		move = 'X';
+		cout << "Player X: "; 
 	}
 	else {
-		cout << "Player O"<< endl; 
+		move = 'O';
+		cout << "Player O: "; 
 	}
+	player = !player; //alternate turns (for next time)
 	unsigned int x;
 	unsigned int y;
 	bool runLoop = true;
@@ -104,7 +108,21 @@ int TicTacToeGame::turn() {
 			int n = game_board.size();
 			int boardIndex = (game_board.size()*y) + x;
 			if (((n < boardIndex) && (boardIndex < n*(n - 1)) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
+				if(game_board[boardIndex].display == " "){
+					//now it is a valid move
+					game_board[boardIndex].display = move; //move the piece to that square
+					//print out updated board
+					operator(cout, game_board); //sos
 
+					//find
+					if (move == 'X') {
+						if (playerX.length == 0) {
+							playerX += x + ', ' + y; //come back to this
+						}	
+					}
+
+					return success;
+				}
 			}
 		}
 		else if (prompt(x, y) == userQuit) {
@@ -112,8 +130,8 @@ int TicTacToeGame::turn() {
 			return userQuit;
 		}
 	}
-	player = !player; //alternate turns
 }
+
 int TicTacToeGame::play() {
 
 }

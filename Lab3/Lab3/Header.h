@@ -8,5 +8,5 @@ int fileFailure();
 //enum definitions
 enum inputs { programName, inputFile, commandLineArguments };
 
-enum results { success, userQuit, commandLineFail, unableToOpenFileFailure, cannotExtractDemensions, inputFileWrongSize, wrongBoardDimensions, cannotReadLine, badColor, unableToExtract, cantReadPieces }; //specify each failure
+enum results { success, userQuit, invalidSquare, commandLineFail, unableToOpenFileFailure, cannotExtractDemensions, inputFileWrongSize, wrongBoardDimensions, cannotReadLine, badColor, unableToExtract, cantReadPieces }; //specify each failure
 

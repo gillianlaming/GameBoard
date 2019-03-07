@@ -18,9 +18,15 @@ public:
 	int turn();
 	int play();
 	bool player = true; //true -> X, false -> O
+	string playerX;
+	string playerO;
 };
 //enum players {X="x", O="o"};
 //vector<game_piece> game_board(25);
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 
+struct player {
+	string display;
+	string moves;
+};
 
