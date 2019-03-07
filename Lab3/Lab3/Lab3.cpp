@@ -4,26 +4,36 @@
 #include "GameBoard.h"
 #include "GamePieces.h"
 #include "TicTacToe.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
 vector<game_piece> game_board(25); //temporary
 
-int main()
+int main(int argc, char * argv[])
 {
-	for ( int i = 0; i < game_board.size(); i++) {
-		int n = game_board.size();
-		game_piece empty;  
-		empty.display = " ";
-
-		if (!((n < i) && (i < n*(n-1)) && (0 < (i % n)) &&((i%n) <= (n - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
-			empty.color = border;
-		}
-		else {
-			empty.color = black;
-		}
-		game_board.push_back(empty);
+	//first check to make sure correct number of arguments are being passed through
+	if (argc != commandLineArguments) {
+		return messageFunct(argv[programName]);
 	}
-	return 0;
+	if (argc[inputFile] != "TicTacToe") {
+		return fileFailure();
+	}
+	TicTacToeGame newGame;
+
+	return newGame.play();
+}
+
+int messageFunct(const char * programName) //takes a C style string or a reference to a const C++ style string as its only parameter
+{
+	cout << "usage: " << programName << " input_file.txt" << endl; //print usage message
+	return commandLineFail; //return failure number
+}
+
+int fileFailure() {
+	cout << "the file was not the correct file. Please include 'TicTacToe' file" << endl;
+	return unableToOpenFileFailure; //unable to open file failure
 }
 

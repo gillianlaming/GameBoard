@@ -12,12 +12,15 @@ private:
 	vector<game_piece> game_board; 
 	
 public:
+	TicTacToeGame();
 	bool done();
 	bool draw();
 	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin
 	int turn();
+	int turns = 0;
 	int play();
-	bool player = true; //true -> X, false -> O
+	bool player = false; //true -> X, false -> O
+	char move;
 	string playerX;
 	string playerO;
 };

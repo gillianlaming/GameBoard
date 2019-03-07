@@ -11,7 +11,21 @@
 
 using namespace std;
 
+TicTacToeGame::TicTacToeGame() {
+	for (int i = 0; i < game_board.size(); i++) {
+		int n = game_board.size();
+		game_piece empty;
+		empty.display = " ";
 
+		if (!((n < i) && (i < n*(n - 1)) && (0 < (i % n)) && ((i%n) <= (n - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
+			empty.color = border;
+		}
+		else {
+			empty.color = black;
+		}
+		game_board.push_back(empty);
+	}
+}
 
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
@@ -26,6 +40,7 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	
 	return output;
 }
+
 
 bool TicTacToeGame:: done() { //fix this
 	int options[8][3] = { {6,7,8},{11,12,13},{16,17,18},{6,11,16},{17,12,7},{18,13,8},{16,12,8},{18,12,6}};
@@ -86,7 +101,8 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 	}
 }
 int TicTacToeGame::turn() {
-	char move;
+	player = !player; //alternate turns 
+	//char move;
 	if (player) {
 		move = 'X';
 		cout << "Player X: "; 
@@ -95,7 +111,7 @@ int TicTacToeGame::turn() {
 		move = 'O';
 		cout << "Player O: "; 
 	}
-	player = !player; //alternate turns (for next time)
+	
 	unsigned int x;
 	unsigned int y;
 	bool runLoop = true;
@@ -108,19 +124,20 @@ int TicTacToeGame::turn() {
 			int n = game_board.size();
 			int boardIndex = (game_board.size()*y) + x;
 			if (((n < boardIndex) && (boardIndex < n*(n - 1)) && (0 < (boardIndex % n)) && ((boardIndex%n) <= (n - 2)))) { //if in inner squares
-				if(game_board[boardIndex].display == " "){
-					//now it is a valid move
+				if(game_board[boardIndex].display == " "){ //now it is a valid move
 					game_board[boardIndex].display = move; //move the piece to that square
-					//print out updated board
-					operator(cout, game_board); //sos
+					cout << *this << endl; //print out updated board
 
 					//find
-					if (move == 'X') {
+					if (player) {
 						if (playerX.length == 0) {
-							playerX += x + ', ' + y; //come back to this
+							playerX += '; ' + x + ', ' + y; //come back to this
 						}	
 					}
-
+					else {
+						playerO += '; ' + x + ', ' + y;
+					}
+					turns++;
 					return success;
 				}
 			}
@@ -133,21 +150,23 @@ int TicTacToeGame::turn() {
 }
 
 int TicTacToeGame::play() {
-	//print out gameboard
-	//turn, then done, then draw
+	cout << *this << endl; //print out updated board
 
+	//turn, then done, then draw
 	while (!done() && !draw()) { 
-		turn();
+		int result = turn();
+		if (result == userQuit) {
+			cout << "User quit. " << turns << " turns were played." << endl; //if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
+			return userQuit;
+		}
 	}
 	if (done()) { //if done returns true, print out the winner, return success
+		cout << "Player " << move << " won." << endl;
+		return success;
+	}
+	else if (draw()) { 
+		cout << "Draw: No more winning moves remain. " << turns << " turns were played." << endl; //if draw returns true, print how many turns were played, say no winning moves remain			
+		return drawResult; //return unique non-zero error code
 
 	}
-	else if (draw()) { //if draw returns true, print how many turns were played, say no winning moves remain
-						//return unique non-zero error code
-
-	}
-	
-	
-
-	//if user quits,  print how many turns were played, say user has quit, return unique non-zero error code
 }
