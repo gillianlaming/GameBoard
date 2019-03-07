@@ -9,7 +9,6 @@
 #include <fstream>
 #include <string>
 
-
 using namespace std;
 
 TicTacToeGame::TicTacToeGame() {
@@ -48,7 +47,7 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) { //look 
 }
 
 
-bool TicTacToeGame:: done() { //fix this
+bool TicTacToeGame:: done() { //hardcoded
 	int options[8][3] = { {6,7,8},{11,12,13},{16,17,18},{6,11,16},{17,12,7},{18,13,8},{16,12,8},{18,12,6}};
 	for (int i = 0; i < 8; i++) {
 		if ((game_board[options[i][0]].display == "X") || (game_board[options[i][0]].display == "O")) {
@@ -93,7 +92,8 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		string message;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
 			if (comma == ',') { //check to make sure the char is a comma
-				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
+				int n = TicTacToeGame::rows;
+				if (xCoord <= game_board.size()/n && yCoord <= game_board.size()/n) { //need to make sure coords are on board
 					runLoop = false;
 					return success;
 				}
@@ -157,8 +157,9 @@ int TicTacToeGame::turn() {
 int TicTacToeGame::getValidMoves(int x, int y) {
 	for (unsigned int i = 0; i < game_board.size(); i++) {
 		if (game_board[i].display == move) {
-			int yCoor = (i % 5); //hardcoded
-			int xCoor = (i - yCoor) / 5;
+			int n = TicTacToeGame::rows;
+			int yCoor = (i % n); 
+			int xCoor = (i - yCoor) / n;
 			cout << xCoor << "," << yCoor << ';';
 		}
 	}

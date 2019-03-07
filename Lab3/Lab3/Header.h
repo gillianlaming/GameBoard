@@ -3,8 +3,6 @@
 //function definitions
 int messageFunct(const char * programName);
 
-int fileFailure();
-
 //enum definitions
 enum inputs { programName, inputFile, commandLineArguments };
 

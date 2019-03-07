@@ -17,7 +17,7 @@ public:
 	TicTacToeGame();
 	bool done();
 	bool draw();
-	int prompt(unsigned int& xCoord, unsigned int& yCoord); //use cin
+	int prompt(unsigned int& xCoord, unsigned int& yCoord); 
 	int turn();
 	int turns = 0;
 	int play();
@@ -27,12 +27,6 @@ public:
 	char playerX[100] = "Player X's moves: ";
 	char playerO[100] = "Player O's moves: ";
 };
-//enum players {X="x", O="o"};
-//vector<game_piece> game_board(25);
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame);
 
-struct player {
-	string display;
-	string moves;
-};
 
