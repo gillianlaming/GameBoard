@@ -30,13 +30,10 @@ TicTacToeGame::TicTacToeGame() {
 	}
 }
 
-ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
-	//look thru board, for each piece add it's display to the output
+ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) { //look thru board, for each piece add it's display to the output
 	int size = newGame.game_board.size();
-	for (int r = newGame.rows-1; r >= 0 ; r--) {//not sure if 
-	//for (int r =0; r < newGame.rows; r++){
+	for (int r = newGame.rows-1; r >= 0 ; r--) {
 		output << r;
-		
 		for (int c = 0; c < newGame.cols; c++) {
 			if (r == 0 && c >0) {
 				output << c;
@@ -45,11 +42,8 @@ ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 				output << newGame.game_board[(newGame.cols*c) + r].display;
 			}
 		}
-		
 		output << endl;
 	}
-
-	
 	return output;
 }
 
@@ -121,23 +115,21 @@ int TicTacToeGame::turn() {
 	else {
 		move = "O";
 	}
-	cout << "player " << move << "'s turn" << endl;
+	cout << "Player " << move << "'s turn" << endl;
 	unsigned int x;
 	unsigned int y;
 	bool runLoop = true;
 	while (runLoop) {
-		if (prompt(x, y) == success) {
+		int result = prompt(x, y);
+		if (result == success) {
 			int n = game_board.size() / rows;
 			int boardIndex = (n*x) + y;
-			//cout << "boardIndex " << boardIndex << endl;
 			if (game_board[boardIndex].color != border){
-				//cout << "valid move" << endl;
 				if(game_board[boardIndex].display == " "){ //now it is a valid move
 					game_board[boardIndex].display = move; //move the piece to that square
 					cout << endl;
 					cout << *this << endl; //print out updated board
 					cout << endl;
-					//find
 					if (player) {
 						cout << playerX;
 						getValidMoves(x, y);
@@ -154,8 +146,7 @@ int TicTacToeGame::turn() {
 				}
 			}
 		}
-		//else if (prompt(x, y) == userQuit) {
-		else { 
+		else if (result == userQuit) { 
 			runLoop = false;
 			return userQuit;
 		}
@@ -164,7 +155,6 @@ int TicTacToeGame::turn() {
 }
 
 int TicTacToeGame::getValidMoves(int x, int y) {
-	//cout << x << "," << y;
 	for (unsigned int i = 0; i < game_board.size(); i++) {
 		if (game_board[i].display == move) {
 			int yCoor = (i % 5); //hardcoded
