@@ -17,7 +17,7 @@ TicTacToeGame::TicTacToeGame() {
 	for (int i = 0; i < rows*cols; i++) {
 		int n = game_board.size();
 		game_piece empty;
-		empty.display = " - ";
+		empty.display = " " ;
 
 		if (!((rows < i) && (i < rows*(cols - 1)) && (0 < (i % rows)) && ((i%rows) <= (cols - 2)))) { //to avoid hardcoding, just hit the edges. hope the equation works
 			empty.color = border;
@@ -32,7 +32,8 @@ TicTacToeGame::TicTacToeGame() {
 ostream & operator<<(ostream & output, const TicTacToeGame & newGame ) {
 	//look thru board, for each piece add it's display to the output
 	int size = newGame.game_board.size();
-	for (int r = 0; r < newGame.rows; r++) {//not sure if 
+	for (int r = newGame.rows-1; r >= 0 ; r--) {//not sure if 
+	//for (int r =0; r < newGame.rows; r++){
 		for (int c = 0; c < newGame.cols; c++) {
 			output << newGame.game_board[(newGame.cols*c)+r].display;
 		}
@@ -87,6 +88,7 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 		char comma;
 		string message;
 		if (iss >> xCoord >> comma >> yCoord) { //if it can wrap to those var types
+			cout << "bleh" << endl;
 			if (comma == ',') { //check to make sure the char is a comma
 				//hardcode
 				if (xCoord <= game_board.size()/5 && yCoord <= game_board.size()/5) { //need to make sure coords are on board
@@ -96,12 +98,12 @@ int TicTacToeGame::prompt(unsigned int& xCoord, unsigned int& yCoord) {
 				}
 			}
 		}
-		else if (iss >> message) {
-			if (message == "quit") { //if the two strings are equal
+		//else if (iss >> message) {
+			else if (line == "quit") { //if the two strings are equal
 				runLoop = false;
 				return userQuit;
 			}
-		}
+		
 		count++;
 	}
 	return success;
