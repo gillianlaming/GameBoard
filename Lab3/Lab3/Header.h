@@ -8,3 +8,4 @@ enum inputs { programName, inputFile, commandLineArguments };
 
 enum results { success, userQuit, drawResult, commandLineFail, unableToOpenFileFailure, cannotExtractDemensions, inputFileWrongSize, wrongBoardDimensions, cannotReadLine, badColor, unableToExtract, cantReadPieces }; //specify each failure
 
+  

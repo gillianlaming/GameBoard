@@ -145,7 +145,7 @@ int TicTacToeGame::turn() {
 					runLoop = false;
 					return success;
 				}
-			}
+			}  
 		}
 		else if (result == userQuit) { 
 			runLoop = false;

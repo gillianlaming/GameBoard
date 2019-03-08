@@ -19,7 +19,7 @@ public:
 	bool draw();
 	int prompt(unsigned int& xCoord, unsigned int& yCoord); 
 	int turn();
-	int turns = 0;
+	int turns = 0;    
 	int play();
 	int getValidMoves(int x, int y);
 	bool player = false; //true -> X, false -> O

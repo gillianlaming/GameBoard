@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 	}
 	else {
 		return messageFunct(argv[programName]);
-	}
+ 	}
 
 	TicTacToeGame newGame;
 
