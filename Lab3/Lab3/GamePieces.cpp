@@ -28,6 +28,9 @@ string noName(piece_color color)
 piece_color whatColor(string color)
 {
 	//this is so inefficient. is there a better way?
+
+	//PTK - For the purpose of this assignment this is the only way to do it. Consider using switch statements?
+
 	if (color == "red") {
 		return red;
 	}

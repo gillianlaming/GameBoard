@@ -1,10 +1,49 @@
-Grader's name:
-grader's initials(used to mark comments in your code):
-Grader's email:
+Grader's name: Pyi Theim Kyaw
+grader's initials(used to mark comments in your code): PTK
+Grader's email: k.pyitheim@wustl.edu
 
-Grade: /100
+Grade: 88/100
 
 Deductions: 
 The grader may leave comments throughout your graded code files. 
 Please search for the grader's initials above within you lab to find
 additional comments and feedback.
+
+
+-3: Compilation warnings
+Examples of compilation warnings you got:
+1>h:\cse332grading\grading-ptkpyitheim\lab3\lab3-gdlaming\lab3\lab3\tictactoe.cpp(18): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+1>h:\cse332grading\grading-ptkpyitheim\lab3\lab3-gdlaming\lab3\lab3\tictactoe.cpp(33): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+1>h:\cse332grading\grading-ptkpyitheim\lab3\lab3-gdlaming\lab3\lab3\tictactoe.cpp(126): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+
+-3 : Not giving me correct usage function if I run this sequence below:
+
+2,2 (turn 1)
+3,2 (turn 2)
+2,2 (turn 3) - A player placed a piece in this coordinate already but no usage message for that was given. Your program just reprompts.
+
+
+-3 : Wrong way of printing board although explicitly stated in the lab instructions
+Correct way:
+4
+3
+2
+1
+0
+ 0 1 2 3 4
+
+Your board:
+4
+3
+2
+1
+0 1234
+
+-2 : ReadMe Test Case documenting
+When you said "Badly Formatted Input String", you need to also give examples of them.
+Document exactly your badly fomatted input string and write down how your program responds.
+Same applies for other cases (i.e. too many arguments and proper input -- started the game).
+
+-1 : Hard coding in TicTacToeGame:: done() method
+
+
